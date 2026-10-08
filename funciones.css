@@ -1,0 +1,1665 @@
+/* =========================================
+   CONFIGURACIÓN GENERAL
+========================================= */
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+:root {
+
+    --papel: #f4f1e8;
+
+    --papel-claro: #faf9f5;
+
+    --azul: #294c60;
+
+    --azul-claro: #5d7b8d;
+
+    --texto: #17202a;
+
+    --texto-oscuro: #263238;
+
+    --texto-secundario: #4b575e;
+
+    --linea: #9ba5a8;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+body {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    background: var(--papel);
+
+    color: var(--texto);
+
+    font-family: "DM Sans", sans-serif;
+
+}
+
+
+/* =========================================
+   FONDO
+========================================= */
+
+.fondo-cuadricula {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -2;
+
+    background-image:
+
+        linear-gradient(
+            rgba(41, 76, 96, 0.055) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(41, 76, 96, 0.055) 1px,
+            transparent 1px
+        );
+
+    background-size: 45px 45px;
+
+    pointer-events: none;
+
+}
+
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    width: 600px;
+
+    height: 600px;
+
+    top: -300px;
+
+    right: -200px;
+
+    border-radius: 50%;
+
+    background: rgba(41, 76, 96, 0.035);
+
+    z-index: -1;
+
+}
+
+
+/* =========================================
+   ENCABEZADO
+========================================= */
+
+.encabezado {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    padding: 35px 55px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    animation: aparecerArriba 1s ease forwards;
+
+}
+
+
+.curso {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+}
+
+
+.curso span {
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    color: var(--azul);
+
+}
+
+
+.curso small {
+
+    color: var(--texto-secundario);
+
+    font-size: 11px;
+
+}
+
+
+.pagina {
+
+    font-size: 12px;
+
+    color: var(--texto-secundario);
+
+    letter-spacing: 2px;
+
+}
+
+
+/* =========================================
+   MAPA
+========================================= */
+
+.mapa {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 1400px;
+
+    height: 100vh;
+
+    margin: auto;
+
+}
+
+
+/* =========================================
+   CENTRO
+========================================= */
+
+.nodo-central {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.9);
+
+    width: 350px;
+
+    text-align: center;
+
+    opacity: 0;
+
+    animation:
+        aparecerCentro
+        1s
+        0.5s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
+
+}
+
+
+.simbolo-central {
+
+    width: 72px;
+
+    height: 72px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border: 1px solid var(--azul);
+
+    border-radius: 50%;
+
+    background: rgba(250, 249, 245, 0.75);
+
+    color: var(--azul);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 32px;
+
+}
+
+
+.linea-central {
+
+    width: 1px;
+
+    height: 25px;
+
+    margin: 10px auto;
+
+    background: var(--linea);
+
+}
+
+
+.nodo-central h1 {
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(40px, 4vw, 58px);
+
+    line-height: 0.95;
+
+    font-weight: 600;
+
+    letter-spacing: -1.5px;
+
+}
+
+
+.nodo-central h1 span {
+
+    display: block;
+
+    color: var(--azul);
+
+}
+
+
+.nodo-central p {
+
+    margin-top: 18px;
+
+    color: var(--texto-secundario);
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================
+   CONEXIONES
+========================================= */
+
+.conexion {
+
+    position: absolute;
+
+    height: 1px;
+
+    background: var(--linea);
+
+    transform-origin: left center;
+
+    opacity: 0;
+
+    animation: dibujarLinea 1s forwards;
+
+}
+
+
+.conexion-introduccion {
+
+    width: 260px;
+
+    left: 50%;
+
+    top: 43%;
+
+    transform:
+        rotate(-90deg)
+        scaleX(0);
+
+    animation-delay: 1.5s;
+
+}
+
+
+.conexion-conceptos {
+
+    width: 330px;
+
+    left: 39%;
+
+    top: 50%;
+
+    transform:
+        rotate(180deg)
+        scaleX(0);
+
+    animation-delay: 1.8s;
+
+}
+
+
+.conexion-graficas {
+
+    width: 330px;
+
+    left: 61%;
+
+    top: 50%;
+
+    transform:
+        rotate(0deg)
+        scaleX(0);
+
+    animation-delay: 2.1s;
+
+}
+
+
+.conexion-ejercicios {
+
+    width: 250px;
+
+    left: 50%;
+
+    top: 58%;
+
+    transform:
+        rotate(145deg)
+        scaleX(0);
+
+    animation-delay: 2.4s;
+
+}
+
+
+.conexion-videos {
+
+    width: 250px;
+
+    left: 50%;
+
+    top: 58%;
+
+    transform:
+        rotate(35deg)
+        scaleX(0);
+
+    animation-delay: 2.7s;
+
+}
+
+
+/* =========================================
+   NODOS
+========================================= */
+
+.nodo {
+
+    position: absolute;
+
+    width: 230px;
+
+    min-height: 115px;
+
+    padding: 22px;
+
+    border: 1px solid rgba(41, 76, 96, 0.25);
+
+    border-radius: 8px;
+
+    background: rgba(250, 249, 245, 0.88);
+
+    color: var(--texto);
+
+    font-family: inherit;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px rgba(30, 40, 45, 0.06);
+
+    opacity: 0;
+
+    animation:
+        aparecerNodo
+        0.8s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease;
+
+}
+
+
+.nodo:hover {
+
+    transform: translateY(-6px);
+
+    background: var(--papel-claro);
+
+    border-color: var(--azul);
+
+    box-shadow:
+        0 14px 30px rgba(30, 40, 45, 0.12);
+
+}
+
+
+.numero {
+
+    position: absolute;
+
+    top: 12px;
+
+    right: 15px;
+
+    font-size: 10px;
+
+    color: var(--texto-secundario);
+
+    letter-spacing: 1px;
+
+}
+
+
+.icono {
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 26px;
+
+    color: var(--azul);
+
+}
+
+
+.titulo-nodo {
+
+    display: block;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 22px;
+
+    font-weight: 600;
+
+}
+
+
+.descripcion-nodo {
+
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 11px;
+
+    color: var(--texto-secundario);
+
+}
+
+
+/* =========================================
+   POSICIONES
+========================================= */
+
+.nodo-introduccion {
+
+    top: 11%;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    animation-delay: 1.5s;
+
+}
+
+
+.nodo-conceptos {
+
+    top: 42%;
+
+    left: 7%;
+
+    animation-delay: 1.8s;
+
+}
+
+
+.nodo-graficas {
+
+    top: 42%;
+
+    right: 7%;
+
+    animation-delay: 2.1s;
+
+}
+
+
+.nodo-ejercicios {
+
+    bottom: 12%;
+
+    left: 28%;
+
+    animation-delay: 2.4s;
+
+}
+
+
+.nodo-videos {
+
+    bottom: 12%;
+
+    right: 28%;
+
+    animation-delay: 2.7s;
+
+}
+
+
+/* =========================================
+   ANOTACIONES
+========================================= */
+
+.nota-matematica {
+
+    position: fixed;
+
+    color: rgba(41, 76, 96, 0.22);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 22px;
+
+    font-style: italic;
+
+    pointer-events: none;
+
+}
+
+
+.nota-1 {
+
+    left: 13%;
+
+    top: 22%;
+
+    transform: rotate(-12deg);
+
+}
+
+
+.nota-2 {
+
+    right: 15%;
+
+    top: 20%;
+
+    transform: rotate(8deg);
+
+}
+
+
+.nota-3 {
+
+    left: 18%;
+
+    bottom: 18%;
+
+    transform: rotate(6deg);
+
+}
+
+
+.nota-4 {
+
+    right: 17%;
+
+    bottom: 27%;
+
+    transform: rotate(-10deg);
+
+}
+
+
+.nota-5 {
+
+    left: 7%;
+
+    top: 67%;
+
+}
+
+
+/* =========================================
+   FIRMA
+========================================= */
+
+.firma {
+
+    position: absolute;
+
+    right: 55px;
+
+    bottom: 35px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    opacity: 0;
+
+    animation:
+        aparecer
+        1s
+        3.2s
+        forwards;
+
+}
+
+
+.firma-texto {
+
+    font-family: "Caveat", cursive;
+
+    font-size: 36px;
+
+    color: var(--azul);
+
+    line-height: 0.8;
+
+}
+
+
+.firma-linea {
+
+    width: 80px;
+
+    height: 1px;
+
+    margin-top: 5px;
+
+    background: var(--azul);
+
+    transform: rotate(-3deg);
+
+}
+
+
+.firma small {
+
+    margin-top: 5px;
+
+    font-size: 9px;
+
+    color: var(--texto-secundario);
+
+    letter-spacing: 1px;
+
+}
+
+
+/* =========================================
+   INDICACIÓN
+========================================= */
+
+.indicacion {
+
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 25px;
+
+    transform: translateX(-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    color: var(--texto-secundario);
+
+    opacity: 0;
+
+    animation:
+        aparecer
+        1s
+        3.5s
+        forwards;
+
+}
+
+
+.linea-indicacion {
+
+    width: 35px;
+
+    height: 1px;
+
+    background: var(--linea);
+
+}
+
+
+/* =====================================================
+   =====================================================
+                INTRODUCCIÓN
+   =====================================================
+   ===================================================== */
+
+.seccion-contenido {
+
+    display: none;
+
+    min-height: 100vh;
+
+    padding: 120px 25px 80px;
+
+    background: var(--papel);
+
+}
+
+
+.contenido-introduccion {
+
+    width: 100%;
+
+    max-width: 900px;
+
+    margin: auto;
+
+}
+
+
+/* =========================================
+   ENCABEZADO DE INTRODUCCIÓN
+========================================= */
+
+.encabezado-seccion {
+
+    text-align: center;
+
+    margin-bottom: 75px;
+
+}
+
+
+.numero-seccion {
+
+    display: block;
+
+    margin-bottom: 18px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    color: var(--azul);
+
+}
+
+
+.encabezado-seccion h2 {
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(45px, 6vw, 68px);
+
+    font-weight: 600;
+
+    line-height: 1;
+
+    color: var(--texto);
+
+}
+
+
+.subtitulo-seccion {
+
+    max-width: 650px;
+
+    margin: 24px auto 0;
+
+    color: var(--texto-secundario);
+
+    line-height: 1.8;
+
+    font-size: 17px;
+
+}
+
+
+/* =========================================
+   BLOQUES
+========================================= */
+
+.bloque-teoria {
+
+    position: relative;
+
+    margin-bottom: 45px;
+
+    padding: 38px 42px;
+
+    background: rgba(250, 249, 245, 0.82);
+
+    border-left: 3px solid var(--azul);
+
+    box-shadow:
+        0 8px 25px rgba(30, 40, 45, 0.05);
+
+}
+
+
+.bloque-teoria h3 {
+
+    margin-bottom: 20px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 30px;
+
+    font-weight: 600;
+
+    color: var(--texto);
+
+    line-height: 1.25;
+
+}
+
+
+.bloque-teoria p {
+
+    margin-bottom: 19px;
+
+    color: var(--texto-oscuro);
+
+    font-size: 18px;
+
+    line-height: 1.9;
+
+}
+
+
+.bloque-teoria strong {
+
+    color: #17202a;
+
+}
+
+
+.etiqueta {
+
+    margin-bottom: 11px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: var(--azul);
+
+}
+
+
+.numero-paso {
+
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    font-family: "Caveat", cursive;
+
+    font-size: 28px;
+
+    color: var(--azul);
+
+}
+
+
+/* =========================================
+   RELACIÓN MATEMÁTICA
+========================================= */
+
+.relacion-matematica {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 30px;
+
+    margin: 30px 0;
+
+    padding: 20px;
+
+    font-size: 27px;
+
+    color: var(--azul);
+
+}
+
+
+.relacion-matematica span {
+
+    color: var(--linea);
+
+    font-size: 25px;
+
+}
+
+
+/* =========================================
+   BLOQUE DESTACADO
+========================================= */
+
+.bloque-destacado {
+
+    background:
+        rgba(41, 76, 96, 0.045);
+
+}
+
+
+/* =========================================
+   OBSERVACIONES
+========================================= */
+
+.observacion {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin: 25px 0;
+
+    padding: 17px 20px;
+
+    border-left: 2px solid var(--azul);
+
+    background: rgba(41, 76, 96, 0.035);
+
+    font-size: 15px;
+
+    color: var(--texto-oscuro);
+
+}
+
+
+.observacion strong {
+
+    color: var(--azul);
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+}
+
+
+/* =========================================
+   REGLA
+========================================= */
+
+.regla {
+
+    margin: 25px 0;
+
+    padding: 22px;
+
+    text-align: center;
+
+    background: rgba(244, 241, 232, 0.75);
+
+    border: 1px solid rgba(41, 76, 96, 0.12);
+
+    color: var(--texto-oscuro);
+
+}
+
+
+.regla span {
+
+    display: block;
+
+    margin-bottom: 12px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: var(--azul);
+
+    text-transform: uppercase;
+
+}
+
+
+/* =========================================
+   ECUACIONES
+========================================= */
+
+.ecuacion {
+
+    margin: 32px 0;
+
+    padding: 24px;
+
+    text-align: center;
+
+    background: rgba(244, 241, 232, 0.75);
+
+    border-top: 1px solid rgba(41, 76, 96, 0.12);
+
+    border-bottom: 1px solid rgba(41, 76, 96, 0.12);
+
+    font-size: 23px;
+
+    color: var(--texto);
+
+}
+
+
+.ecuacion-pequena {
+
+    font-size: 21px;
+
+}
+
+
+.ecuacion-grande {
+
+    font-size: 24px;
+
+}
+
+
+.ecuacion-resultado {
+
+    margin: 30px auto;
+
+    padding: 25px;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 27px;
+
+}
+
+
+/* =========================================
+   RESULTADO
+========================================= */
+
+.resultado-final {
+
+    margin: 65px 0;
+
+    padding: 48px;
+
+    text-align: center;
+
+    border: 1px solid rgba(41, 76, 96, 0.3);
+
+    background: var(--papel-claro);
+
+}
+
+
+.resultado-final > span {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    color: var(--azul);
+
+}
+
+
+.resultado-final h3 {
+
+    margin-top: 12px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 32px;
+
+    color: var(--texto);
+
+}
+
+
+.resultado-final > p {
+
+    max-width: 700px;
+
+    margin: 25px auto;
+
+    color: var(--texto-oscuro);
+
+    font-size: 18px;
+
+    line-height: 1.9;
+
+}
+
+
+/* =========================================
+   IDEA CLAVE
+========================================= */
+
+.idea-clave {
+
+    max-width: 700px;
+
+    margin: 30px auto 0;
+
+    padding: 20px;
+
+    background: rgba(41, 76, 96, 0.045);
+
+}
+
+
+.idea-clave strong {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--azul);
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.idea-clave p {
+
+    margin: 0;
+
+    color: var(--texto-oscuro);
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+}
+
+
+/* =========================================
+   CONEXIÓN CON DERIVADA DIRECCIONAL
+========================================= */
+
+.conexion-direccional {
+
+    margin-top: 80px;
+
+    padding: 50px 30px;
+
+    text-align: center;
+
+    border-top: 1px solid var(--linea);
+
+}
+
+
+.flecha-conexion {
+
+    display: block;
+
+    margin-bottom: 20px;
+
+    font-size: 30px;
+
+    color: var(--azul);
+
+}
+
+
+.conexion-direccional p {
+
+    color: var(--texto-oscuro);
+
+    font-size: 18px;
+
+    line-height: 1.8;
+
+}
+
+
+.conexion-direccional h3 {
+
+    max-width: 700px;
+
+    margin: 20px auto;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 30px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    color: var(--texto);
+
+}
+
+
+.formula-final {
+
+    margin-top: 30px;
+
+    font-size: 27px;
+
+    color: var(--azul);
+
+}
+
+
+/* =========================================
+   BOTÓN VOLVER
+========================================= */
+
+.boton-volver {
+
+    display: block;
+
+    margin: 75px auto 0;
+
+    padding: 13px 27px;
+
+    background: transparent;
+
+    border: 1px solid var(--linea);
+
+    border-radius: 5px;
+
+    color: var(--texto);
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+.boton-volver:hover {
+
+    background: var(--azul);
+
+    color: white;
+
+    border-color: var(--azul);
+
+}
+
+
+/* =========================================
+   MATHJAX
+========================================= */
+
+mjx-container {
+
+    color: var(--texto) !important;
+
+}
+
+
+mjx-container[display="true"] {
+
+    margin-top: 10px !important;
+
+    margin-bottom: 10px !important;
+
+}
+
+
+/* =========================================
+   ANIMACIONES
+========================================= */
+
+@keyframes aparecerCentro {
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+
+    }
+
+}
+
+
+@keyframes aparecerNodo {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(20px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+@keyframes dibujarLinea {
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            rotate(0deg)
+            scaleX(1);
+
+    }
+
+}
+
+
+@keyframes aparecer {
+
+    to {
+
+        opacity: 1;
+
+    }
+
+}
+
+
+@keyframes aparecerArriba {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(-15px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .encabezado {
+
+        padding: 25px;
+
+    }
+
+
+    .mapa {
+
+        min-height: 1300px;
+
+        padding-top: 100px;
+
+    }
+
+
+    .nodo-central {
+
+        top: 32%;
+
+        width: 300px;
+
+    }
+
+
+    .nodo-introduccion {
+
+        top: 7%;
+
+    }
+
+
+    .nodo-conceptos {
+
+        left: 50%;
+
+        top: 48%;
+
+        transform: translateX(-50%);
+
+    }
+
+
+    .nodo-graficas {
+
+        left: 50%;
+
+        right: auto;
+
+        top: 62%;
+
+        transform: translateX(-50%);
+
+    }
+
+
+    .nodo-ejercicios {
+
+        left: 50%;
+
+        bottom: 13%;
+
+        transform: translateX(-50%);
+
+    }
+
+
+    .nodo-videos {
+
+        left: 50%;
+
+        right: auto;
+
+        bottom: 3%;
+
+        transform: translateX(-50%);
+
+    }
+
+
+    .conexion {
+
+        display: none;
+
+    }
+
+
+    .nota-matematica {
+
+        display: none;
+
+    }
+
+
+    .firma {
+
+        right: 25px;
+
+    }
+
+
+    .indicacion {
+
+        display: none;
+
+    }
+
+}
+
+
+/* =========================================
+   RESPONSIVE — INTRODUCCIÓN
+========================================= */
+
+@media (max-width: 600px) {
+
+    .seccion-contenido {
+
+        padding: 100px 18px 60px;
+
+    }
+
+
+    .bloque-teoria {
+
+        padding: 27px 22px;
+
+    }
+
+
+    .bloque-teoria h3 {
+
+        font-size: 25px;
+
+    }
+
+
+    .bloque-teoria p {
+
+        font-size: 17px;
+
+        line-height: 1.8;
+
+    }
+
+
+    .resultado-final {
+
+        padding: 32px 20px;
+
+    }
+
+
+    .ecuacion {
+
+        overflow-x: auto;
+
+        font-size: 18px;
+
+    }
+
+
+    .ecuacion-grande {
+
+        font-size: 19px;
+
+    }
+
+
+    .conexion-direccional h3 {
+
+        font-size: 25px;
+
+    }
+
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es-gt">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clase de Cálculo 2</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Video Interactivo de fondo -->
+
+    <video autoplay muted loop playsinline class="video-fondo">
+
+        <source src="video.mp4" type="video/mp4">
+
+    </video>
+
+
+    <!-- Fondo oscuro -->
+
+    <div class="overlay"></div>
+
+
+    <!-- Mis datos -->
+
+    <div class="contenedor">
+
+        <h1>Derivada Direccional</h1>
+
+        <p class="info">
+            Ingeniería en Sistemas<br>
+            Brayan Daniel Barrios Carranza<br>
+            Carnet: 9941-15-6843<br>
+            Sección "A"<br>
+            Cuarto Semestre
+        </p>
+
+        <a href="funciones.html" class="boton-redireccion">
+            Entrar al contenido
+        </a>
+
+    </div>
+
+
+    <!-- MÚSICA DE FONDO -->
+
+    <audio id="musica-fondo" autoplay loop>
+        <source src="Interstelar.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <!-- Control para iniciar la música si el navegador bloquea el autoplay -->
+
+    <script>
+
+        const musica = document.getElementById("musica-fondo");
+
+        // Intentar reproducir automáticamente
+        musica.play().catch(() => {
+            console.log("El navegador bloqueó el autoplay.");
+        });
+
+        // Si el navegador bloqueó el autoplay,
+        // el primer clic iniciará la música.
+        document.addEventListener("click", () => {
+
+            musica.play().catch(() => {});
+
+        }, { once: true });
+
+    </script>
+
+</body>
+
+</html>

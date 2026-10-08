@@ -1,0 +1,933 @@
+/* =========================================
+   CONFIGURACIÓN GENERAL PARA CONCEPTOS
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family: "DM Sans", sans-serif;
+
+    color: #26313c;
+
+    background: #f5f7f9;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   FONDO DE HOJA CUADRICULADA
+========================================= */
+
+.fondo-cuadricula {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -5;
+
+    background-color: #f5f7f9;
+
+    background-image:
+        linear-gradient(
+            rgba(52, 87, 120, 0.055) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(52, 87, 120, 0.055) 1px,
+            transparent 1px
+        );
+
+    background-size: 35px 35px;
+}
+
+
+/* =========================================
+   PEQUEÑAS IMPERFECCIONES DE LA HOJA
+========================================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -4;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,255,255,0.8),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 75%,
+            rgba(220,228,235,0.35),
+            transparent 30%
+        );
+}
+
+
+/* =========================================
+   ENCABEZADO
+========================================= */
+
+.encabezado {
+    position: relative;
+
+    width: 100%;
+
+    padding: 25px 6vw;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    border-bottom: 1px solid rgba(42, 64, 83, 0.18);
+
+    background: rgba(245, 247, 249, 0.72);
+
+    backdrop-filter: blur(5px);
+}
+
+.curso {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+.curso span {
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    color: #315b82;
+}
+
+.curso small {
+    font-size: 12px;
+
+    color: #7a838c;
+}
+
+.pagina {
+    font-family: "Caveat", cursive;
+
+    font-size: 22px;
+
+    color: #496d8d;
+}
+
+
+/* =========================================
+   ANOTACIONES FLOTANTES
+========================================= */
+
+body::after {
+    content: "∇f";
+
+    position: fixed;
+
+    top: 150px;
+
+    right: 8%;
+
+    font-family: "Caveat", cursive;
+
+    font-size: 45px;
+
+    color: rgba(49, 91, 130, 0.12);
+
+    transform: rotate(-8deg);
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   CONTENEDOR
+========================================= */
+
+.contenedor {
+    position: relative;
+
+    width: min(1050px, 88%);
+
+    margin: auto;
+
+    padding: 85px 0 70px;
+}
+
+
+/* =========================================
+   TITULO PRINCIPAL
+========================================= */
+
+.titulo {
+    position: relative;
+
+    max-width: 780px;
+
+    margin-bottom: 55px;
+}
+
+.etiqueta {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-family: "Caveat", cursive;
+
+    font-size: 23px;
+
+    color: #54799b;
+}
+
+.titulo h1 {
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(43px, 6vw, 70px);
+
+    line-height: 1.05;
+
+    font-weight: 600;
+
+    color: #202c38;
+}
+
+.titulo h1 span {
+    display: block;
+
+    color: #416d92;
+}
+
+.titulo p {
+    max-width: 680px;
+
+    margin-top: 22px;
+
+    font-size: 18px;
+
+    line-height: 1.8;
+
+    color: #5d6873;
+}
+
+.linea-titulo {
+    position: relative;
+
+    width: 120px;
+
+    height: 1px;
+
+    margin-top: 30px;
+
+    background: #4d718f;
+}
+
+.linea-titulo::after {
+    content: "→";
+
+    position: absolute;
+
+    right: -25px;
+
+    top: -13px;
+
+    font-family: "Caveat", cursive;
+
+    font-size: 22px;
+
+    color: #4d718f;
+}
+
+
+/* =========================================
+   RUTA CONCEPTUAL
+========================================= */
+
+.ruta {
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-bottom: 75px;
+
+    padding: 18px 25px;
+
+    background: rgba(255, 255, 255, 0.55);
+
+    border-top: 1px solid rgba(48, 76, 100, 0.16);
+
+    border-bottom: 1px solid rgba(48, 76, 100, 0.16);
+
+    color: #69747e;
+
+    font-size: 13px;
+
+    letter-spacing: 0.3px;
+}
+
+.ruta::before {
+    content: "recorrido";
+
+    position: absolute;
+
+    left: 12px;
+
+    top: -15px;
+
+    padding: 0 6px;
+
+    font-family: "Caveat", cursive;
+
+    font-size: 18px;
+
+    color: #66819a;
+
+    background: #f5f7f9;
+
+    transform: rotate(-4deg);
+}
+
+.ruta strong {
+    color: #315b82;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   CONCEPTO
+========================================= */
+
+.concepto {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns: 90px 1fr;
+
+    gap: 25px;
+
+    padding: 65px 0;
+
+    border-top: 1px solid rgba(45, 67, 87, 0.14);
+}
+
+.concepto::before {
+    content: "";
+
+    position: absolute;
+
+    left: 38px;
+
+    top: 0;
+
+    width: 1px;
+
+    height: 100%;
+
+    background: rgba(68, 103, 132, 0.13);
+
+    z-index: -1;
+}
+
+
+/* =========================================
+   NUMERACIÓN
+========================================= */
+.numero-concepto {
+    /* 1. TAMAÑO Y FORMA */
+    width: 75px; 
+    height: 75px;
+    border-radius: 50%;
+    
+    /* 2. COLORES EXACTOS DE TU DISEÑO */
+    background-color: transparent; /* Permite que se vea la cuadrícula de fondo */
+    border: 1px solid #a3b8cc;     /* Borde azul/grisáceo claro y fino */
+    color: #405c73;                /* Azul acero/pizarra para el texto */
+    
+    /* 3. TIPOGRAFÍA ELEGANTE */
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 1.5rem;             /* Tamaño ideal para la letra */
+    
+    /* 4. CENTRADO PERFECTO EN DOS LÍNEAS */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 1;                /* Junta la palabra "Paso" con el número */
+    white-space: normal;
+    padding: 10px;
+    box-sizing: border-box;
+}
+/* =========================================
+   CONTENIDO
+========================================= */
+
+.contenido-concepto {
+    position: relative;
+
+    max-width: 820px;
+
+    padding: 5px 0 10px;
+}
+
+.pequeno-titulo {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-family: "Caveat", cursive;
+
+    font-size: 21px;
+
+    color: #5c7c98;
+}
+
+.contenido-concepto h2 {
+    margin-bottom: 22px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(31px, 4vw, 43px);
+
+    line-height: 1.15;
+
+    font-weight: 600;
+
+    color: #202d39;
+}
+
+.contenido-concepto p {
+    margin-bottom: 18px;
+
+    font-size: 18px;
+
+    line-height: 1.85;
+
+    color: #4e5964;
+}
+
+.contenido-concepto strong {
+    color: #315b82;
+}
+
+
+/* =========================================
+   FÓRMULAS
+========================================= */
+
+.formula {
+    position: relative;
+
+    margin: 30px 0;
+
+    padding: 25px 30px;
+
+    text-align: center;
+
+    font-size: 23px;
+
+    color: #25384a;
+
+    background: rgba(255, 255, 255, 0.62);
+
+    border-left: 2px solid #5b7b96;
+
+    box-shadow:
+        0 8px 25px rgba(39, 61, 80, 0.035);
+}
+
+.formula::before {
+    content: "fórmula";
+
+    position: absolute;
+
+    top: -13px;
+
+    left: 15px;
+
+    padding: 0 7px;
+
+    font-family: "Caveat", cursive;
+
+    font-size: 17px;
+
+    color: #68829a;
+
+    background: #f5f7f9;
+
+    transform: rotate(-2deg);
+}
+
+.formula-destacada {
+    border-left: 3px solid #315b82;
+
+    background: rgba(70, 108, 143, 0.055);
+}
+
+.formula-principal {
+    padding: 35px;
+
+    font-size: 27px;
+
+    border: 1px solid rgba(49, 91, 130, 0.22);
+
+    border-left: 4px solid #315b82;
+
+    background: rgba(255, 255, 255, 0.75);
+}
+
+
+/* =========================================
+   EJEMPLOS
+========================================= */
+
+.ejemplo {
+    position: relative;
+
+    margin: 35px 0;
+
+    padding: 30px 32px;
+
+    background: rgba(255, 255, 255, 0.47);
+
+    border: 1px solid rgba(46, 70, 91, 0.13);
+}
+
+.ejemplo::before {
+    content: "Ejemplo";
+
+    position: absolute;
+
+    top: -15px;
+
+    left: 22px;
+
+    padding: 0 8px;
+
+    font-family: "Caveat", cursive;
+
+    font-size: 20px;
+
+    color: #557792;
+
+    background: #f5f7f9;
+
+    transform: rotate(-3deg);
+}
+
+.ejemplo .formula {
+    background: rgba(255,255,255,0.72);
+}
+
+
+/* =========================================
+   NOTAS MANUSCRITAS
+========================================= */
+
+.nota {
+    position: relative;
+
+    display: flex;
+
+    gap: 15px;
+
+    align-items: flex-start;
+
+    margin-top: 35px;
+
+    padding: 20px 24px;
+
+    background: rgba(235, 240, 244, 0.55);
+
+    border-left: 2px solid #71879a;
+}
+
+.nota.azul {
+    background: rgba(69, 108, 143, 0.055);
+
+    border-left-color: #426d91;
+}
+
+.nota.final {
+    background: rgba(69, 108, 143, 0.075);
+
+    border-left: 3px solid #315b82;
+}
+
+.nota-icono {
+    flex-shrink: 0;
+
+    font-family: "Caveat", cursive;
+
+    font-size: 28px;
+
+    color: #426d91;
+}
+
+.nota p {
+    margin: 0;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   DESGLOSE DE LA FÓRMULA
+========================================= */
+
+.desglose {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-top: 35px;
+}
+
+.desglose div {
+    position: relative;
+
+    padding: 23px 15px;
+
+    text-align: center;
+
+    background: rgba(255,255,255,0.52);
+
+    border: 1px solid rgba(48, 75, 98, 0.12);
+}
+
+.desglose span {
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-size: 25px;
+
+    color: #315b82;
+}
+
+.desglose p {
+    margin: 0;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   RESUMEN FINAL
+========================================= */
+
+.resumen {
+    position: relative;
+
+    margin-top: 65px;
+
+    padding: 45px 35px;
+
+    background: rgba(255, 255, 255, 0.57);
+
+    border-top: 1px solid rgba(43, 67, 88, 0.18);
+
+    border-bottom: 1px solid rgba(43, 67, 88, 0.18);
+}
+
+.resumen::before {
+    content: "✎";
+
+    position: absolute;
+
+    top: 15px;
+
+    right: 25px;
+
+    font-family: "Caveat", cursive;
+
+    font-size: 32px;
+
+    color: rgba(58, 92, 120, 0.25);
+
+    transform: rotate(8deg);
+}
+
+.resumen h2 {
+    margin-bottom: 35px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 36px;
+
+    color: #202d39;
+}
+
+.resumen-linea {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+}
+
+.resumen-paso {
+    min-width: 120px;
+
+    text-align: center;
+}
+
+.resumen-paso span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-family: "Caveat", cursive;
+
+    font-size: 22px;
+
+    color: #587b98;
+}
+
+.resumen-paso p {
+    margin: 0;
+
+    font-size: 14px;
+
+    color: #596671;
+}
+
+.resumen-paso.destacado p {
+    font-weight: 700;
+
+    color: #315b82;
+}
+
+.flecha {
+    color: #82919e;
+
+    font-size: 21px;
+}
+
+
+/* =========================================
+   VOLVER
+========================================= */
+
+.volver {
+    margin-top: 55px;
+
+    text-align: center;
+}
+
+.volver a {
+    display: inline-block;
+
+    padding: 11px 24px;
+
+    color: #496e8d;
+
+    text-decoration: none;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 14px;
+
+    border-bottom: 1px solid rgba(73, 110, 141, 0.5);
+
+    transition: 0.3s;
+}
+
+.volver a:hover {
+    color: #243f59;
+
+    border-bottom-color: #243f59;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   FIRMA D & G
+========================================= */
+
+.firma {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 4px;
+
+    margin-top: 85px;
+}
+
+.firma span {
+    font-family: "Caveat", cursive;
+
+    font-size: 37px;
+
+    color: #315b82;
+}
+
+.firma div {
+    width: 75px;
+
+    height: 1px;
+
+    background: #718697;
+}
+
+.firma small {
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+
+    color: #78838d;
+}
+
+
+/* =========================================
+   ANIMACIONES
+========================================= */
+
+.concepto,
+.ruta,
+.resumen {
+    opacity: 0;
+
+    transform: translateY(35px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.concepto.visible,
+.ruta.visible,
+.resumen.visible {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .encabezado {
+        padding: 20px 5vw;
+    }
+
+    .contenedor {
+        width: 90%;
+
+        padding-top: 60px;
+    }
+
+    .titulo h1 {
+        font-size: 46px;
+    }
+
+    .titulo p {
+        font-size: 16px;
+    }
+
+    .concepto {
+        grid-template-columns: 55px 1fr;
+
+        gap: 15px;
+    }
+
+    .concepto::before {
+        left: 27px;
+    }
+
+    .numero-concepto {
+        width: 50px;
+        height: 50px;
+
+        font-size: 19px;
+    }
+
+    .contenido-concepto h2 {
+        font-size: 31px;
+    }
+
+    .contenido-concepto p {
+        font-size: 16px;
+    }
+
+    .formula {
+        padding: 20px 12px;
+
+        font-size: 19px;
+    }
+
+    .formula-principal {
+        font-size: 21px;
+    }
+
+    .ejemplo {
+        padding: 25px 18px;
+    }
+
+    .desglose {
+        grid-template-columns: 1fr;
+    }
+
+    .resumen {
+        padding: 35px 20px;
+    }
+
+    .resumen-linea {
+        flex-direction: column;
+    }
+
+    .flecha {
+        transform: rotate(90deg);
+    }
+
+}
