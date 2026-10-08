@@ -1,38 +1,24 @@
 <!DOCTYPE html>
 <html lang="es-gt">
-
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Clase de Cálculo 2</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
     <!-- Video Interactivo de fondo -->
-
     <video autoplay muted loop playsinline class="video-fondo">
-
         <source src="video.mp4" type="video/mp4">
-
     </video>
 
-
     <!-- Fondo oscuro -->
-
     <div class="overlay"></div>
 
-
     <!-- Mis datos -->
-
     <div class="contenedor">
-
         <h1>Derivada Direccional</h1>
-
         <p class="info">
             Ingeniería en Sistemas<br>
             Brayan Daniel Barrios Carranza<br>
@@ -44,38 +30,40 @@
         <a href="funciones.html" class="boton-redireccion">
             Entrar al contenido
         </a>
-
     </div>
 
-
     <!-- MÚSICA DE FONDO -->
-
-    <audio id="musica-fondo" autoplay loop>
-        <source src="Interstelar.mp3" type="audio/mpeg">
+    <audio id="musica-fondo" loop>
+        <source src="musica.mp3" type="audio/mpeg">
     </audio>
 
-
-    <!-- Control para iniciar la música si el navegador bloquea el autoplay -->
-
     <script>
+        // Asegurarnos de que toda la página cargue primero
+        window.addEventListener('DOMContentLoaded', () => {
+            const musica = document.getElementById("musica-fondo");
+            musica.volume = 0.5;
 
-        const musica = document.getElementById("musica-fondo");
+            // Función agresiva para forzar el play
+            const intentarReproducir = () => {
+                musica.play().then(() => {
+                    // Si arranca con éxito, eliminamos los rastreadores para que la página sea rápida
+                    ['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evento => 
+                        window.removeEventListener(evento, intentarReproducir)
+                    );
+                }).catch(() => {
+                    // Si el navegador lo frena, fallamos en silencio y esperamos el movimiento del mouse
+                });
+            };
 
-        // Intentar reproducir automáticamente
-        musica.play().catch(() => {
-            console.log("El navegador bloqueó el autoplay.");
+            // Intento 1: Reproducción automática inmediata
+            intentarReproducir();
+
+            // Intento 2: Enganchar la reproducción al más mínimo micro-movimiento
+            ['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evento => 
+                window.addEventListener(evento, intentarReproducir, { once: true })
+            );
         });
-
-        // Si el navegador bloqueó el autoplay,
-        // el primer clic iniciará la música.
-        document.addEventListener("click", () => {
-
-            musica.play().catch(() => {});
-
-        }, { once: true });
-
     </script>
 
 </body>
-
 </html>

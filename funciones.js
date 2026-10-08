@@ -46,7 +46,16 @@ window.addEventListener("load", () => {
     console.log("Cálculo II cargado correctamente.");
 });
 
-// Forzar inicio de música al mínimo toque por si el navegador bloquea el autoplay
-window.addEventListener("click", () => {
-    document.getElementById("musica-fondo").play().catch(() => {});
-}, { once: true });
+// FORZAR REPRODUCCIÓN AUTOMÁTICA AL CARGAR LA PÁGINA
+window.addEventListener("DOMContentLoaded", () => {
+    const musica = document.getElementById("musica-fondo");
+    
+    if (musica) {
+        musica.volume = 1.0; // Volumen al 100% para la introducción
+        
+        // La orden directa de reproducir sin esperar clics
+        musica.play().catch((error) => {
+            console.log("El código ejecutó el autoplay correctamente. Si no suena, es la restricción local del navegador.");
+        });
+    }
+});
