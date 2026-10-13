@@ -17,23 +17,26 @@ nodos.forEach((nodo) => {
     nodo.addEventListener("click", () => {
         const seccion = nodo.getAttribute("data-seccion");
 
-        // INTRODUCCIÓN (se abre en la misma página)
+        // 1. INTRODUCCIÓN (Se abre en la misma página)
         if (seccion === "introduccion") {
             mapa.style.display = "none";
             introduccion.style.display = "block";
-            document.body.classList.add("en-introduccion");
-            // En la Introducción la música se apaga
-            document.dispatchEvent(new CustomEvent("musica:pausar"));
-            if (indicacion) {
-                indicacion.style.display = "none";
-            }
+            if (indicacion) indicacion.style.display = "none";
+            
+            const musica = document.getElementById("musica-fondo");
+            if (musica) musica.volume = 0.2; 
+
             window.scrollTo({ top: 0, behavior: "smooth" });
-            return;
         }
 
-        // OTRAS SECCIONES (redirigen a su página)
-        if (paginas[seccion]) {
-            window.location.href = paginas[seccion];
+        // 2. CONCEPTOS (Redirige al HTML de conceptos)
+        if (seccion === "conceptos") {
+            window.location.href = "conceptos.html";
+        }
+
+        // 3. GRÁFICAS (Redirige al nuevo HTML de gráficas)
+        if (seccion === "graficas") {
+            window.location.href = "graficas.html";
         }
     });
 });

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es-gt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f7f9fa">
+    <meta name="description" content="Interpretación visual de la derivada direccional mediante gráficas interactivas 2D y 3D.">
+    <title>Gráficas - Derivada Direccional</title>
+
+    <!-- FUENTES DE TEXTO -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- LIBRERÍA PLOTLY PARA LAS GRÁFICAS INTERACTIVAS -->
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+
+    <!-- LIBRERÍA MATHJAX PARA LAS MATEMÁTICAS -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f7f9fa;
+            background-image:
+                linear-gradient(#eef1f3 1px, transparent 1px),
+                linear-gradient(90deg, #eef1f3 1px, transparent 1px);
+            background-size: 30px 30px;
+            font-family: 'Inter', sans-serif;
+            color: #4a5568;
+            margin: 0;
+            padding: 0;
+        }
+
+        .contenedor-principal {
+            width: min(100% - 32px, 900px);
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .btn-volver {
+            display: inline-block;
+            margin: 20px 30px;
+            text-decoration: none;
+            font-weight: 600;
+            color: #2b6cb0;
+            transition: color 0.2s ease;
+        }
+
+        .btn-volver:hover,
+        .btn-volver:focus-visible {
+            color: #1a365d;
+            text-decoration: underline;
+        }
+
+        .subtitulo-mano {
+            font-family: 'Caveat', cursive;
+            color: #718096;
+            font-size: 1.6rem;
+            margin-bottom: -10px;
+        }
+
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+            color: #2d3748;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: clamp(2.1rem, 6vw, 3rem);
+            margin-top: 10px;
+        }
+
+        h2 {
+            font-size: clamp(1.45rem, 4vw, 1.8rem);
+            border-bottom: 2px solid #eef1f3;
+            padding-bottom: 10px;
+            margin-top: 50px;
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .caja-analisis {
+            background-color: #ffffff;
+            border-left: 3px solid #2b6cb0;
+            padding: 30px 40px;
+            margin: 30px 0;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .etiqueta-analisis {
+            font-family: 'Caveat', cursive;
+            background-color: #f7f9fa;
+            color: #2b6cb0;
+            font-size: 1.3rem;
+            padding: 2px 15px;
+            position: absolute;
+            top: -15px;
+            left: 15px;
+            font-weight: bold;
+        }
+
+        .formula {
+            text-align: center;
+            font-size: 1.2rem;
+            overflow-x: auto;
+            padding: 4px 0;
+        }
+
+        .grafica {
+            width: 100%;
+            height: 500px;
+            margin-top: 25px;
+            border-radius: 8px;
+            background: #ffffff;
+            border: 1px solid #eef1f3;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .nota-grafica {
+            color: #718096;
+            font-size: 0.92rem;
+            margin-top: 12px;
+        }
+
+        .resumen {
+            background: #edf5ff;
+            border-left: 3px solid #2b6cb0;
+            border-radius: 0 8px 8px 0;
+            padding: 18px 22px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 600px) {
+            .contenedor-principal {
+                width: min(100% - 20px, 900px);
+                margin: 20px auto;
+                padding: 12px;
+            }
+
+            .btn-volver {
+                margin: 18px 16px;
+            }
+
+            .caja-analisis {
+                padding: 28px 20px 20px;
+            }
+
+            .grafica {
+                height: 390px;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="funciones.html" class="btn-volver">← Volver al Mapa</a>
+
+    <main class="contenedor-principal">
+        <p class="subtitulo-mano">Interpretación Visual</p>
+        <h1>Análisis de la Gráfica</h1>
+
+        <p>
+            Ya calculamos el valor de nuestra derivada direccional en la sección de conceptos.
+            Ahora vamos a interpretar ese resultado geométricamente y observar qué sucede sobre
+            la superficie de nuestra función.
+        </p>
+
+        <!-- PUNTO 1: FUNCIÓN Y POSICIÓN -->
+        <h2>1. El Terreno y Nuestra Posición</h2>
+        <section class="caja-analisis">
+            <span class="etiqueta-analisis">El Escenario</span>
+            <p>La función define una superficie tridimensional:</p>
+            <p class="formula">
+                $$ f(x,y)=3x^2y-4xy^3 $$
+            </p>
+            <p>
+                Evaluaremos la función en la coordenada del plano
+                <strong>\((-1,3)\)</strong>. En la gráfica 3D, la altura de ese punto será
+                \(f(-1,3)\).
+            </p>
+            <p class="formula">
+                $$ f(-1,3)=3(-1)^2(3)-4(-1)(3)^3=117 $$
+            </p>
+        </section>
+
+        <!-- PUNTO 2: DIRECCIÓN -->
+        <h2>2. La Brújula (Vector Dirección)</h2>
+        <section class="caja-analisis">
+            <span class="etiqueta-analisis">La Ruta</span>
+            <p>
+                La dirección está definida por el segmento que va desde
+                \(P(-2,4)\) hasta \(Q(1,-2)\). Restamos las coordenadas para obtener el vector:
+            </p>
+            <p class="formula">
+                $$ \vec v=Q-P=(3,-6) $$
+            </p>
+            <p>Su magnitud es \(\sqrt{3^2+(-6)^2}=\sqrt{45}\). Por eso, el vector unitario es:</p>
+            <p class="formula">
+                $$ \vec u=\left(\frac{3}{\sqrt{45}},-\frac{6}{\sqrt{45}}\right) $$
+            </p>
+        </section>
+
+        <!-- PUNTO 3: DERIVADA DIRECCIONAL -->
+        <h2>3. El Descenso (La Derivada Direccional)</h2>
+        <section class="caja-analisis" style="border-left-color: #e53e3e;">
+            <span class="etiqueta-analisis" style="color: #e53e3e;">El Comportamiento</span>
+            <p>El gradiente de la función es:</p>
+            <p class="formula">
+                $$ \nabla f(x,y)=\left(6xy-4y^3,\ 3x^2-12xy^2\right) $$
+            </p>
+            <p>En el punto \((-1,3)\):</p>
+            <p class="formula">
+                $$ \nabla f(-1,3)=(-126,111) $$
+            </p>
+            <p>Al realizar el producto punto con el vector unitario, obtenemos:</p>
+            <p class="formula" style="font-size: 1.35rem;">
+                $$ D_{\vec u}f(-1,3)=\frac{-1044}{\sqrt{45}}\approx -155.62 $$
+            </p>
+            <p><strong>¿Qué significa este valor negativo?</strong></p>
+            <p>
+                Significa que, desde el punto indicado, la función disminuye inicialmente cuando
+                avanzamos en la dirección de \(P\) hacia \(Q\). La magnitud indica una tasa de
+                descenso pronunciada en las unidades de esta función y sus ejes. No significa
+                por sí sola que exista un precipicio vertical.
+            </p>
+        </section>
+
+        <!-- GRÁFICA 2D -->
+        <h2>4. Mapa de Navegación (Plano XY)</h2>
+        <p>
+            Esta vista desde arriba muestra la ruta de \(P\) a \(Q\), nuestra posición
+            \((-1,3)\) y la dirección del vector unitario. La flecha representa el sentido
+            del movimiento en el plano XY.
+        </p>
+        <div id="grafica-2d" class="grafica" role="img" aria-label="Gráfica bidimensional de la ruta y la dirección en el plano XY"></div>
+        <p class="nota-grafica">
+            Puedes pasar el cursor sobre los puntos para consultar sus coordenadas.
+        </p>
+
+        <!-- GRÁFICA 3D -->
+        <h2>5. La Superficie (Vista Tridimensional)</h2>
+        <p>
+            Ahora observa la superficie \(z=f(x,y)\). El punto de evaluación está marcado
+            sobre la montaña y la flecha roja indica el sentido horizontal en el que se evalúa
+            la derivada direccional. La altura cambia al desplazarnos por la superficie.
+        </p>
+        <div id="grafica-3d" class="grafica" role="img" aria-label="Superficie tridimensional de la función con el punto de evaluación y la dirección"></div>
+        <p class="nota-grafica">
+            Arrastra para girar la superficie y usa el zoom para explorarla. La flecha roja
+            sigue la dirección en el plano XY; la variación de altura se aprecia en la superficie.
+        </p>
+
+        <div class="resumen">
+            <strong>Idea clave:</strong> la derivada direccional mide la tasa instantánea de
+            cambio de la función en una dirección específica. Su signo negativo indica descenso
+            inicial en esa dirección.
+        </div>
+    </main>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof Plotly === 'undefined') {
+                document.querySelectorAll('.grafica').forEach((elemento) => {
+                    elemento.textContent = 'No se pudo cargar Plotly. Revisa tu conexión a Internet y vuelve a intentarlo.';
+                });
+                return;
+            }
+
+            // Datos del problema
+            const x0 = -1;
+            const y0 = 3;
+            const ux = 3 / Math.sqrt(45);
+            const uy = -6 / Math.sqrt(45);
+
+            // Función original
+            function f(x, y) {
+                return 3 * x * x * y - 4 * x * y * y * y;
+            }
+
+            // 1. Ruta de P a Q
+            const rutaPQ = {
+                x: [-2, 1],
+                y: [4, -2],
+                mode: 'markers+lines+text',
+                text: ['P (-2, 4)', 'Q (1, -2)'],
+                textposition: ['top left', 'bottom right'],
+                line: { dash: 'dot', width: 2, color: '#a0aec0' },
+                name: 'Ruta de P a Q',
+                marker: { size: 9, color: '#a0aec0' },
+                textfont: { family: 'Inter', size: 12, color: '#718096' },
+                hovertemplate: '%{text}<extra></extra>'
+            };
+
+            // 2. Punto donde se evalúa la derivada
+            const puntoEvaluacion = {
+                x: [x0],
+                y: [y0],
+                mode: 'markers+text',
+                text: ['Inicio (-1, 3)'],
+                textposition: 'top right',
+                name: 'Punto de evaluación',
+                marker: { size: 12, color: '#2b6cb0' },
+                textfont: { family: 'Inter', size: 13, color: '#2b6cb0' },
+                hovertemplate: 'Punto: (-1, 3)<extra></extra>'
+            };
+
+            // 3. Diseño del plano XY
+            const diseno2D = {
+                autosize: true,
+                margin: { t: 35, b: 50, l: 55, r: 25 },
+                xaxis: {
+                    title: 'Eje X',
+                    range: [-3, 2.5],
+                    gridcolor: '#eef1f3',
+                    zerolinecolor: '#cbd5e0'
+                },
+                yaxis: {
+                    title: 'Eje Y',
+                    range: [-3, 5],
+                    gridcolor: '#eef1f3',
+                    zerolinecolor: '#cbd5e0',
+                    scaleanchor: 'x',
+                    scaleratio: 1
+                },
+                plot_bgcolor: '#ffffff',
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                showlegend: false,
+                annotations: [{
+                    x: x0 + ux * 1.8,
+                    y: y0 + uy * 1.8,
+                    ax: x0,
+                    ay: y0,
+                    xref: 'x',
+                    yref: 'y',
+                    axref: 'x',
+                    ayref: 'y',
+                    showarrow: true,
+                    arrowhead: 2,
+                    arrowsize: 1.5,
+                    arrowwidth: 3,
+                    arrowcolor: '#e53e3e',
+                    text: 'Dirección u',
+                    font: { family: 'Inter', size: 12, color: '#e53e3e' }
+                }]
+            };
+
+            Plotly.newPlot(
+                'grafica-2d',
+                [rutaPQ, puntoEvaluacion],
+                diseno2D,
+                { displayModeBar: false, responsive: true }
+            );
+
+            // 4. Crear una malla para la superficie tridimensional
+            const xs = [];
+            const ys = [];
+            const pasos = 55;
+
+            for (let i = 0; i <= pasos; i++) {
+                xs.push(-2.5 + (5 * i / pasos));
+                ys.push(-0.5 + (5.5 * i / pasos));
+            }
+
+            const zs = ys.map((y) => xs.map((x) => f(x, y)));
+
+            const superficie = {
+                type: 'surface',
+                x: xs,
+                y: ys,
+                z: zs,
+                colorscale: [
+                    [0, '#dbeafe'],
+                    [0.35, '#93c5fd'],
+                    [0.65, '#4a90d9'],
+                    [1, '#1e3a8a']
+                ],
+                opacity: 0.92,
+                colorbar: {
+                    title: 'f(x,y)',
+                    titleside: 'right',
+                    thickness: 12
+                },
+                contours: {
+                    z: {
+                        show: true,
+                        usecolormap: true,
+                        project: { z: true }
+                    }
+                },
+                hovertemplate: 'x: %{x:.2f}<br>y: %{y:.2f}<br>z: %{z:.2f}<extra></extra>'
+            };
+
+            // Punto sobre la superficie: (-1, 3, 117)
+            const punto3D = {
+                type: 'scatter3d',
+                mode: 'markers+text',
+                x: [x0],
+                y: [y0],
+                z: [f(x0, y0)],
+                text: ['(-1, 3, 117)'],
+                textposition: 'top center',
+                name: 'Punto de evaluación',
+                marker: {
+                    size: 6,
+                    color: '#e53e3e',
+                    line: { color: '#ffffff', width: 2 }
+                },
+                textfont: { family: 'Inter', size: 11, color: '#9b2c2c' },
+                hovertemplate: 'x: -1<br>y: 3<br>f(x,y): 117<extra></extra>'
+            };
+
+            // Flecha 3D que sigue la dirección en XY y la superficie z=f(x,y)
+            const longitud = 0.9;
+            const flechaX = [x0, x0 + ux * longitud];
+            const flechaY = [y0, y0 + uy * longitud];
+            const flechaZ = flechaX.map((x, i) => f(x, flechaY[i]));
+
+            const direccion3D = {
+                type: 'scatter3d',
+                mode: 'lines+markers',
+                x: flechaX,
+                y: flechaY,
+                z: flechaZ,
+                name: 'Dirección u sobre la superficie',
+                line: { color: '#e53e3e', width: 7 },
+                marker: {
+                    size: [0, 4],
+                    color: '#e53e3e'
+                },
+                hovertemplate: 'x: %{x:.2f}<br>y: %{y:.2f}<br>z: %{z:.2f}<extra>Dirección u</extra>'
+            };
+
+            const diseno3D = {
+                autosize: true,
+                margin: { t: 20, b: 10, l: 5, r: 5 },
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                scene: {
+                    xaxis: {
+                        title: 'Eje X',
+                        backgroundcolor: '#f7f9fa',
+                        gridcolor: '#dfe6ee',
+                        zerolinecolor: '#cbd5e0'
+                    },
+                    yaxis: {
+                        title: 'Eje Y',
+                        backgroundcolor: '#f7f9fa',
+                        gridcolor: '#dfe6ee',
+                        zerolinecolor: '#cbd5e0'
+                    },
+                    zaxis: {
+                        title: 'z = f(x,y)',
+                        backgroundcolor: '#f7f9fa',
+                        gridcolor: '#dfe6ee',
+                        zerolinecolor: '#cbd5e0'
+                    },
+                    camera: {
+                        eye: { x: 1.55, y: 1.55, z: 1.15 }
+                    },
+                    aspectmode: 'manual',
+                    aspectratio: { x: 1, y: 1, z: 0.8 }
+                },
+                showlegend: false
+            };
+
+            Plotly.newPlot(
+                'grafica-3d',
+                [superficie, direccion3D, punto3D],
+                diseno3D,
+                { displayModeBar: true, responsive: true }
+            );
+        });
+    </script>
+
+</body>
+</html>
