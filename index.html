@@ -4,11 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clase de Cálculo 2</title>
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
+
+    <!-- Pantalla de entrada (solo aparece si el navegador bloquea la música) -->
+    <style>
+        .pantalla-entrada {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            text-align: center;
+            color: #faf9f5;
+            background: rgba(15, 26, 34, 0.78);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .pantalla-entrada.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .pantalla-entrada .nota-musical {
+            font-size: 42px;
+            animation: flotar 2.4s ease-in-out infinite;
+        }
+
+        .pantalla-entrada .titulo-entrada {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(30px, 5vw, 52px);
+            font-weight: 600;
+        }
+
+        .pantalla-entrada .texto-entrada {
+            padding: 12px 30px;
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border: 1px solid rgba(250, 249, 245, 0.7);
+            border-radius: 6px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .pantalla-entrada:hover .texto-entrada {
+            background: #faf9f5;
+            color: #294c60;
+        }
+
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Video Interactivo de fondo -->
+    <!-- Video de fondo (silenciado: los navegadores permiten autoplay solo así) -->
     <video autoplay muted loop playsinline class="video-fondo">
         <source src="video.mp4" type="video/mp4">
     </video>
@@ -32,37 +96,46 @@
         </a>
     </div>
 
-    <!-- MÚSICA DE FONDO -->
-    <audio id="musica-fondo" loop>
-        <source src="musica.mp3" type="audio/mpeg">
+    <!-- MÚSICA DE FONDO (volumen 0.5 en el index) -->
+    <audio id="musica-fondo" loop preload="auto" data-volumen="0.5">
+        <source src="Interstellar on Piano.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- PANTALLA DE ENTRADA -->
+    <div id="pantalla-entrada" class="pantalla-entrada">
+        <span class="nota-musical">♪</span>
+        <span class="titulo-entrada">Derivada Direccional</span>
+        <span class="texto-entrada">Haz clic para entrar</span>
+    </div>
+
+    <script src="musica.js"></script>
+
     <script>
-        // Asegurarnos de que toda la página cargue primero
-        window.addEventListener('DOMContentLoaded', () => {
-            const musica = document.getElementById("musica-fondo");
-            musica.volume = 0.5;
+        (function () {
+            const musica = document.getElementById('musica-fondo');
+            const pantalla = document.getElementById('pantalla-entrada');
 
-            // Función agresiva para forzar el play
-            const intentarReproducir = () => {
-                musica.play().then(() => {
-                    // Si arranca con éxito, eliminamos los rastreadores para que la página sea rápida
-                    ['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evento => 
-                        window.removeEventListener(evento, intentarReproducir)
-                    );
-                }).catch(() => {
-                    // Si el navegador lo frena, fallamos en silencio y esperamos el movimiento del mouse
-                });
-            };
+            let silenciada = false;
+            try { silenciada = localStorage.getItem('musicaSilenciada') === '1'; } catch (e) {}
 
-            // Intento 1: Reproducción automática inmediata
-            intentarReproducir();
+            // Si tras un instante la música no arrancó sola, el navegador la bloqueó:
+            // mostramos la pantalla para que el clic la inicie.
+            setTimeout(() => {
+                if (musica.paused && !silenciada) {
+                    pantalla.classList.add('visible');
+                }
+            }, 700);
 
-            // Intento 2: Enganchar la reproducción al más mínimo micro-movimiento
-            ['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evento => 
-                window.addEventListener(evento, intentarReproducir, { once: true })
-            );
-        });
+            pantalla.addEventListener('click', () => {
+                pantalla.classList.remove('visible');
+                musica.play().catch(() => {});
+            });
+
+            // Si la música arranca sola, la pantalla ya no hace falta
+            musica.addEventListener('playing', () => {
+                pantalla.classList.remove('visible');
+            });
+        })();
     </script>
 
 </body>

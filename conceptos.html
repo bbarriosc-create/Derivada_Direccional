@@ -49,10 +49,10 @@
             <span class="etiqueta">Metodología práctica</span>
             <h1>Derivada <span>direccional</span></h1>
             <p>
-                Es determinar la pendiente en un punto de una superficie, obteniendo un vector ortogonal a la superficie dada. Analizaremos la teoría y la aplicaremos a este problema:
+                Es determinar la tasa de cambio de una función en un punto, siguiendo una dirección dada. Analizaremos la teoría y la aplicaremos a este problema:
             </p>
-            <div class="ejemplo-destacado" style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 12px; border: 1px dashed #ccc; margin-top: 20px;">
-                <p style="margin: 0; font-family: 'Playfair Display', serif; font-size: 1.2rem; text-align: center; color: #111;">
+            <div class="ejemplo-destacado">
+                <p>
                     Calcular la derivada direccional de \( f(x,y) = 3x^2y - 4xy^3 \) en el punto \( (-1, 3) \) <br>
                     en la dirección que va de \( P=(-2, 4) \) a \( Q=(1, -2) \).
                 </p>
@@ -75,7 +75,7 @@
             <div class="contenido-concepto">
                 <span class="pequeno-titulo">La base del cálculo</span>
                 <h2>Derivadas Parciales</h2>
-                
+
                 <p><strong>Fórmula General:</strong> Es realizar la derivada de la función asumiendo una variable como independiente y las demás como constantes.</p>
                 <div class="formula">
                     \[ f_x = \frac{\partial f}{\partial x} \qquad f_y = \frac{\partial f}{\partial y} \]
@@ -100,7 +100,7 @@
             <div class="contenido-concepto">
                 <span class="pequeno-titulo">Definiendo el rumbo</span>
                 <h2>Vector de dirección</h2>
-                
+
                 <p><strong>Fórmula General:</strong> Para encontrar un vector que va desde un punto inicial \( P(x_1, y_1) \) hasta un punto final \( Q(x_2, y_2) \), restamos sus coordenadas (Final - Inicial).</p>
                 <div class="formula">
                     \[ \vec{PQ} = (x_2 - x_1)\hat{i} + (y_2 - y_1)\hat{j} \]
@@ -110,7 +110,7 @@
                     <h3>Aplicación al problema:</h3>
                     <p>Nos indican que la dirección va de \( P = (-2, 4) \) a \( Q = (1, -2) \):</p>
                     <div class="formula">
-                        \[ \vec{PQ} = (1 - (-1)) \hat{i} + (-2 - 4) \hat{j} \]
+                        \[ \vec{PQ} = (1 - (-2)) \hat{i} + (-2 - 4) \hat{j} \]
                     </div>
                     <p>Cuidado con la ley de signos al restar \(1 - (-2)\), que se convierte en \(1 + 2 = 3\):</p>
                     <div class="formula">
@@ -126,7 +126,7 @@
             <div class="contenido-concepto">
                 <span class="pequeno-titulo">Normalización</span>
                 <h2>Vector Unitario</h2>
-                
+
                 <p><strong>Fórmula General:</strong> Un vector unitario \( \vec{u} \) tiene magnitud 1. Se obtiene dividiendo un vector entre su propia magnitud \( |\vec{v}| \).</p>
                 <div class="formula">
                     \[ \vec{u} = \frac{\vec{v}}{|\vec{v}|} \qquad \text{donde} \quad |\vec{v}| = \sqrt{a^2 + b^2} \]
@@ -152,8 +152,8 @@
             <div class="contenido-concepto">
                 <span class="pequeno-titulo">Evaluación en el punto</span>
                 <h2>El Gradiente</h2>
-                
-                <p><strong>Fórmula General:</strong> El gradiente \( \nabla f \) es un vector formado por las derivadas parciales. Al evaluarlo en un punto específico \( (x_0, y_0) \), nos da los incrementos exactos en ese punto.</p>
+
+                <p><strong>Fórmula General:</strong> El gradiente \( \nabla f \) es un vector formado por las derivadas parciales. Al evaluarlo en un punto específico \( (x_0, y_0) \), sus componentes son las tasas de cambio de la función en ese punto.</p>
                 <div class="formula">
                     \[ \nabla f(x_0, y_0) = f_x(x_0, y_0)\hat{i} + f_y(x_0, y_0)\hat{j} \]
                 </div>
@@ -162,14 +162,14 @@
                     <h3>Aplicación al problema:</h3>
                     <p>Evaluamos las ecuaciones del Paso 1 en nuestro punto de interés: \( x = -1, y = 3 \).</p>
                     <div class="formula">
-                        \[ \Delta f_x = 6(-1)(3) - 4(3)^3 = -18 - 108 = -126 \]
+                        \[ f_x(-1,3) = 6(-1)(3) - 4(3)^3 = -18 - 108 = -126 \]
                     </div>
                     <div class="formula">
-                        \[ \Delta f_y = 3(-1)^2 - 12(-1)(3)^2 = 3 + 108 = 111 \]
+                        \[ f_y(-1,3) = 3(-1)^2 - 12(-1)(3)^2 = 3 + 108 = 111 \]
                     </div>
                     <p>Nuestro vector Gradiente numérico es:</p>
                     <div class="formula formula-destacada">
-                        \[ \Delta f(x,y) = -126\hat{i} + 111\hat{j} \]
+                        \[ \nabla f(-1,3) = -126\hat{i} + 111\hat{j} \]
                     </div>
                 </div>
             </div>
@@ -181,7 +181,7 @@
             <div class="contenido-concepto">
                 <span class="pequeno-titulo">El cálculo final</span>
                 <h2>Derivada Direccional</h2>
-                
+
                 <p><strong>Fórmula General:</strong> Es el producto escalar (o producto punto) entre el vector gradiente evaluado y el vector unitario de dirección.</p>
                 <div class="formula formula-principal">
                     \[ D_{\vec{u}} f(x,y) = \nabla f(x,y) \cdot \vec{u} \]
@@ -204,11 +204,15 @@
                     <div class="formula formula-principal">
                         \[ = \frac{-1044}{\sqrt{45}} \]
                     </div>
+                    <p>Como \( \sqrt{45} = 3\sqrt{5} \), también se puede escribir simplificado:</p>
+                    <div class="formula">
+                        \[ = -\frac{348}{\sqrt{5}} \approx -155.64 \]
+                    </div>
                 </div>
-                
+
                 <div class="nota final">
                     <span class="nota-icono">∴</span>
-                    <p><strong>Conclusión:</strong> El resultado \(-1044/\sqrt{45}\) representa la tasa de cambio exacta de nuestra superficie en ese punto y dirección.</p>
+                    <p><strong>Conclusión:</strong> El resultado \(-1044/\sqrt{45}\) representa la tasa de cambio exacta de nuestra superficie en ese punto y dirección. Al ser negativo, la función <strong>disminuye</strong> en esa dirección.</p>
                 </div>
             </div>
         </section>
@@ -259,7 +263,7 @@
 
     </main>
 
-    <!-- JS -->
+    <!-- JS (en esta página la música está apagada) -->
     <script src="conceptos.js"></script>
 
 </body>
