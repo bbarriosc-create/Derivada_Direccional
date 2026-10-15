@@ -1,0 +1,782 @@
+
+<!DOCTYPE html>
+<html lang="es-gt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ejercicios | Derivada Direccional</title>
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="ejercicios.css">
+
+    <!-- MathJax: permite mostrar las fórmulas matemáticas -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            },
+            chtml: {
+                scale: 1
+            },
+            startup: {
+                typeset: true
+            }
+        };
+    </script>
+
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+
+    <!-- JavaScript -->
+    <script src="ejercicios.js" defer></script>
+</head>
+
+<body>
+
+    <div class="page-background"></div>
+
+    <header class="topbar">
+        <a href="funciones.html" class="back-button">
+            <span aria-hidden="true">←</span>
+            Volver al mapa
+        </a>
+
+        <div class="signature" aria-label="Firma D y G">
+            D <span>&</span> G
+            <p class="eyebrow">CÁLCULO II · 2026</p>
+        </div>
+    </header>
+
+    <main class="main-container">
+
+        <!-- ENCABEZADO -->
+        <section class="hero">
+            
+
+            <h1>Laboratorio de <span>ejercicios</span></h1>
+
+            <p class="hero-description">
+                La teoría nos da las herramientas; la práctica nos enseña
+                a utilizarlas. Resuelve cada ejercicio a tu ritmo y descubre
+                el procedimiento paso a paso.
+            </p>
+
+            <div class="hero-note">
+                <span class="note-symbol">✎</span>
+                <span>Piensa, calcula y después comprueba tu respuesta.</span>
+            </div>
+        </section>
+
+        <!-- FÓRMULAS DE APOYO -->
+        <section class="formula-section" aria-labelledby="formula-title">
+
+            <div class="section-heading">
+                <span class="section-number">00</span>
+
+                <div>
+                    <p class="section-label">ANTES DE COMENZAR</p>
+                    <h2 id="formula-title">Tu caja de herramientas</h2>
+                </div>
+            </div>
+
+            <p class="section-description">
+                Estas son las fórmulas que utilizarás durante los ejercicios.
+            </p>
+
+            <div class="formula-grid">
+
+                <article class="formula-card">
+                    <span class="formula-tag">01 · Gradiente</span>
+
+                    <div class="formula">
+                        \[
+                        \nabla f =
+                        \left(
+                        \frac{\partial f}{\partial x},
+                        \frac{\partial f}{\partial y}
+                        \right)
+                        \]
+                    </div>
+
+                    <p>
+                        Reúne las derivadas parciales de la función.
+                    </p>
+                </article>
+
+                <article class="formula-card">
+                    <span class="formula-tag">02 · Vector unitario</span>
+
+                    <div class="formula">
+                        \[
+                        \vec{u} =
+                        \frac{\vec{v}}{\|\vec{v}\|}
+                        \]
+                    </div>
+
+                    <p>
+                        Convierte un vector en otro de longitud uno,
+                        conservando su dirección.
+                    </p>
+
+                    <div class="formula secondary-formula">
+                        \[
+                        \|\vec{v}\|=\sqrt{a^2+b^2}
+                        \]
+                    </div>
+                </article>
+
+                <article class="formula-card formula-card-featured">
+                    <span class="formula-tag">03 · Derivada direccional</span>
+
+                    <div class="formula">
+                        \[
+                        D_{\vec{u}}f =
+                        \nabla f \cdot \vec{u}
+                        \]
+                    </div>
+
+                    <p>
+                        Calcula cuánto cambia la función en una dirección
+                        determinada mediante el producto punto.
+                    </p>
+                </article>
+
+            </div>
+
+            <div class="formula-reminder">
+                <span class="reminder-icon">!</span>
+
+                <p>
+                    <strong>Recuerda:</strong> si te dan un vector de
+                    dirección que no es unitario, primero debes normalizarlo
+                    antes de calcular la derivada direccional.
+                </p>
+            </div>
+        </section>
+
+        <!-- NIVEL 1 -->
+        <section class="exercise-section" id="calentamiento">
+
+            <div class="section-heading">
+                <span class="section-number">01</span>
+
+                <div>
+                    <p class="section-label">NIVEL INICIAL</p>
+                    <h2>Calentamiento</h2>
+                </div>
+
+                <span class="level-badge level-easy">Básico</span>
+            </div>
+
+            <p class="section-description">
+                Empezaremos con un caso directo para repasar el gradiente
+                y el producto punto.
+            </p>
+
+            <article class="exercise-card">
+
+                <div class="exercise-card-header">
+                    <span class="exercise-index">EJERCICIO 01</span>
+                    <span class="exercise-status">Aplicación directa</span>
+                </div>
+
+                <h3>Un cambio en la dirección del eje x</h3>
+
+                <div class="problem-box">
+                    <p>Sea la función:</p>
+
+                    <div class="problem-formula">
+                        \[
+                        f(x,y)=x^2+y^2
+                        \]
+                    </div>
+
+                    <p>Se desea calcular la derivada direccional en el punto:</p>
+
+                    <div class="problem-formula">
+                        \[
+                        P=(1,2), \qquad \vec{u}=(1,0)
+                        \]
+                    </div>
+
+                    <p class="question">
+                        ¿Cuál es el valor de
+                        \(D_{\vec{u}}f(1,2)\)?
+                    </p>
+                </div>
+
+                <div class="exercise-hint">
+                    <span class="hint-icon">✎</span>
+                    <p>
+                        <strong>Pista:</strong> deriva la función con respecto
+                        a \(x\) y a \(y\), evalúa en el punto y calcula
+                        el producto punto.
+                    </p>
+                </div>
+
+                <button class="solution-button"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="solution-1"
+                    data-solution="solution-1">
+                    <span>Ver solución paso a paso</span>
+                    <span class="button-arrow" aria-hidden="true">↓</span>
+                </button>
+
+                <div class="solution-panel"
+                    id="solution-1"
+                    hidden>
+
+                    <div class="solution-title">
+                        <span class="solution-check">✓</span>
+                        <h4>Resolución completa</h4>
+                    </div>
+
+                    <div class="solution-step">
+                        <span class="step-number">1</span>
+
+                        <div>
+                            <h5>Encontrar las derivadas parciales</h5>
+
+                            <p>Derivamos respecto a \(x\), tratando \(y\) como constante:</p>
+
+                            \[
+                            f_x(x,y)=2x
+                            \]
+
+                            <p>Ahora derivamos respecto a \(y\):</p>
+
+                            \[
+                            f_y(x,y)=2y
+                            \]
+                        </div>
+                    </div>
+
+                    <div class="solution-step">
+                        <span class="step-number">2</span>
+
+                        <div>
+                            <h5>Construir el gradiente</h5>
+
+                            \[
+                            \nabla f(x,y)=(2x,2y)
+                            \]
+
+                            <p>Evaluamos en \(P=(1,2)\):</p>
+
+                            \[
+                            \nabla f(1,2)=(2(1),2(2))
+                            \]
+
+                            \[
+                            \boxed{\nabla f(1,2)=(2,4)}
+                            \]
+                        </div>
+                    </div>
+
+                    <div class="solution-step">
+                        <span class="step-number">3</span>
+
+                        <div>
+                            <h5>Calcular el producto punto</h5>
+
+                            <p>La dirección dada es \(\vec{u}=(1,0)\).</p>
+
+                            \[
+                            D_{\vec{u}}f(1,2)=(2,4)\cdot(1,0)
+                            \]
+
+                            \[
+                            D_{\vec{u}}f(1,2)=2(1)+4(0)
+                            \]
+
+                            \[
+                            \boxed{D_{\vec{u}}f(1,2)=2}
+                            \]
+                        </div>
+                    </div>
+
+                    <div class="answer-box">
+                        <span class="answer-label">RESPUESTA FINAL</span>
+                        <p>La derivada direccional es <strong>2</strong>.</p>
+
+                        <p class="answer-explanation">
+                            En esa dirección, la función tiene una tasa de
+                            cambio positiva igual a 2 en el punto indicado.
+                        </p>
+                    </div>
+                </div>
+
+            </article>
+        </section>
+
+        <!-- NIVEL 2 -->
+        <section class="exercise-section" id="caso-estudio">
+
+            <div class="section-heading">
+                <span class="section-number">02</span>
+
+                <div>
+                    <p class="section-label">NIVEL INTERMEDIO</p>
+                    <h2>Caso de estudio</h2>
+                </div>
+
+                <span class="level-badge level-medium">Intermedio</span>
+            </div>
+
+            <p class="section-description">
+                En este problema tendrás que normalizar el vector antes
+                de calcular la derivada direccional.
+            </p>
+
+            <article class="exercise-card">
+
+                <div class="exercise-card-header">
+                    <span class="exercise-index">EJERCICIO 02</span>
+                    <span class="exercise-status">Normalización vectorial</span>
+                </div>
+
+                <h3>Preparar la dirección correcta</h3>
+
+                <div class="problem-box">
+                    <p>Considera la función:</p>
+
+                    <div class="problem-formula">
+                        \[
+                        f(x,y)=x^2+xy
+                        \]
+                    </div>
+
+                    <p>En el punto \(P=(1,2)\), se proporciona el vector:</p>
+
+                    <div class="problem-formula">
+                        \[
+                        \vec{v}=(3,4)
+                        \]
+                    </div>
+
+                    <p class="question">
+                        Calcula la derivada direccional de \(f\) en \(P\)
+                        siguiendo la dirección de \(\vec{v}\).
+                    </p>
+                </div>
+
+                <div class="exercise-hint">
+                    <span class="hint-icon">✎</span>
+                    <p>
+                        <strong>Pista:</strong> primero encuentra la magnitud
+                        de \(\vec{v}\), luego el vector unitario.
+                    </p>
+                </div>
+
+                <button class="solution-button"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="solution-2"
+                    data-solution="solution-2">
+                    <span>Ver solución paso a paso</span>
+                    <span class="button-arrow" aria-hidden="true">↓</span>
+                </button>
+
+                <div class="solution-panel"
+                    id="solution-2"
+                    hidden>
+
+                    <div class="solution-title">
+                        <span class="solution-check">✓</span>
+                        <h4>Resolución completa</h4>
+                    </div>
+
+                    <div class="solution-step">
+                        <span class="step-number">1</span>
+
+                        <div>
+                            <h5>Calcular la magnitud del vector</h5>
+
+                            \[
+                            \|\vec{v}\|=\sqrt{3^2+4^2}
+                            \]
+
+                            \[
+                            \|\vec{v}\|=\sqrt{9+16}=\sqrt{25}
+                            \]
+
+                            \[
+                            \boxed{\|\vec{v}\|=5}
+                            \]
+                        </div>
+                    </div>
+
+                    <div class="solution-step">
+                        <span class="step-number">2</span>
+
+                        <div>
+                            <h5>Normalizar el vector</h5>
+
+                            <p>Dividimos cada componente entre la magnitud:</p>
+
+                            \[
+                            \vec{u}=\frac{(3,4)}{5}
+                            \]
+
+                            \[
+                            \boxed{\vec{u}=
+                            \left(\frac35,\frac45\right)}
+                            \]
+
+                            <p>
+                                Ahora tenemos un vector unitario, porque
+                                su magnitud es 1.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="solution-step">
+                        <span class="step-number">3</span>
+
+                        <div>
+                            <h5>Encontrar las derivadas parciales</h5>
+
+                            \[
+                            f_x(x,y)=2x+y
+                            \]
+
+                            \[
+                            f_y(x,y)=x
+                            \]
+
+                            <p>Por tanto, el gradiente es:</p>
+
+                            \[
+                            \nabla f(x,y)=(2x+y,x)
+                            \]
+                        </div>
+                    </div>
+
+                    <div class="solution-step">
+                        <span class="step-number">4</span>
+
+                        <div>
+                            <h5>Evaluar el gradiente en el punto</h5>
+
+                            <p>Sustituimos \(x=1\) y \(y=2\):</p>
+
+                            \[
+                            \nabla f(1,2)=(2(1)+2,1)
+                            \]
+
+                            \[
+                            \boxed{\nabla f(1,2)=(4,1)}
+                            \]
+                        </div>
+                    </div>
+
+                    <div class="solution-step">
+                        <span class="step-number">5</span>
+
+                        <div>
+                            <h5>Aplicar la derivada direccional</h5>
+
+                            \[
+                            D_{\vec{u}}f(1,2)=(4,1)\cdot
+                            \left(\frac35,\frac45\right)
+                            \]
+
+                            \[
+                            D_{\vec{u}}f(1,2)=
+                            4\left(\frac35\right)+1\left(\frac45\right)
+                            \]
+
+                            \[
+                            D_{\vec{u}}f(1,2)=\frac{12}{5}+\frac45
+                            \]
+
+                            \[
+                            \boxed{D_{\vec{u}}f(1,2)=\frac{16}{5}}
+                            \]
+                        </div>
+                    </div>
+
+                    <div class="answer-box">
+                        <span class="answer-label">RESPUESTA FINAL</span>
+                        <p>La derivada direccional es <strong>\(\frac{16}{5}=3.2\)</strong>.</p>
+
+                        <p class="answer-explanation">
+                            La función aumenta a una tasa de 3.2 en esa
+                            dirección, en el punto indicado.
+                        </p>
+                    </div>
+
+                </div>
+
+            </article>
+        </section>
+
+        <!-- NIVEL 3 -->
+        <section class="exercise-section" id="reto-ingenieria">
+
+            <div class="section-heading">
+                <span class="section-number">03</span>
+
+                <div>
+                    <p class="section-label">NIVEL DE APLICACIÓN</p>
+                    <h2>El reto de ingeniería</h2>
+                </div>
+
+                <span class="level-badge level-challenge">Razonamiento</span>
+            </div>
+
+            <p class="section-description">
+                Aquí tendrás que interpretar el gradiente para descubrir
+                la dirección en la que una función aumenta más rápidamente.
+            </p>
+
+            <article class="exercise-card challenge-card">
+
+                <div class="exercise-card-header">
+                    <span class="exercise-index">EJERCICIO 03</span>
+                    <span class="exercise-status">Máximo crecimiento</span>
+                </div>
+
+                <h3>Encontrar la ruta de mayor aumento</h3>
+
+                <div class="context-note">
+                    <span class="context-icon">⌁</span>
+
+                    <p>
+                        <strong>Situación:</strong> imagina que una función
+                        representa la temperatura en distintos puntos de
+                        una superficie. Queremos conocer hacia dónde aumenta
+                        más rápidamente.
+                    </p>
+                </div>
+
+                <div class="problem-box">
+                    <p>La temperatura está representada por:</p>
+
+                    <div class="problem-formula">
+                        \[
+                        T(x,y)=4x^2+y^2
+                        \]
+                    </div>
+
+                    <p>Nos encontramos en el punto:</p>
+
+                    <div class="problem-formula">
+                        \[
+                        P=(1,2)
+                        \]
+                    </div>
+
+                    <p class="question">
+                        Determina la dirección unitaria de máximo crecimiento
+                        y calcula la tasa máxima de aumento.
+                    </p>
+                </div>
+
+                <div class="exercise-hint">
+                    <span class="hint-icon">✎</span>
+                    <p>
+                        <strong>Pista:</strong> el gradiente señala la
+                        dirección de máximo crecimiento. Para obtener una
+                        dirección unitaria, debes normalizarlo.
+                    </p>
+                </div>
+
+                <button class="solution-button"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="solution-3"
+                    data-solution="solution-3">
+                    <span>Ver solución paso a paso</span>
+                    <span class="button-arrow" aria-hidden="true">↓</span>
+                </button>
+
+                <div class="solution-panel"
+                    id="solution-3"
+                    hidden>
+
+                    <div class="solution-title">
+                        <span class="solution-check">✓</span>
+                        <h4>Resolución completa</h4>
+                    </div>
+
+                    <div class="solution-step">
+                        <span class="step-number">1</span>
+
+                        <div>
+                            <h5>Calcular las derivadas parciales</h5>
+
+                            \[
+                            T_x(x,y)=8x
+                            \]
+
+                            \[
+                            T_y(x,y)=2y
+                            \]
+
+                            <p>El gradiente de la temperatura es:</p>
+
+                            \[
+                            \nabla T(x,y)=(8x,2y)
+                            \]
+                        </div>
+                    </div>
+
+                    <div class="solution-step">
+                        <span class="step-number">2</span>
+
+                        <div>
+                            <h5>Evaluar en el punto</h5>
+
+                            \[
+                            \nabla T(1,2)=(8(1),2(2))
+                            \]
+
+                            \[
+                            \boxed{\nabla T(1,2)=(8,4)}
+                            \]
+
+                            <p>
+                                Este vector indica la dirección de máximo
+                                crecimiento de la temperatura en ese punto.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="solution-step">
+                        <span class="step-number">3</span>
+
+                        <div>
+                            <h5>Calcular la magnitud del gradiente</h5>
+
+                            \[
+                            \|\nabla T(1,2)\|=\sqrt{8^2+4^2}
+                            \]
+
+                            \[
+                            =\sqrt{64+16}=\sqrt{80}
+                            \]
+
+                            \[
+                            \boxed{\|\nabla T(1,2)\|=4\sqrt5}
+                            \]
+                        </div>
+                    </div>
+
+                    <div class="solution-step">
+                        <span class="step-number">4</span>
+
+                        <div>
+                            <h5>Encontrar la dirección unitaria</h5>
+
+                            <p>Dividimos el gradiente entre su magnitud:</p>
+
+                            \[
+                            \vec{u}_{\max}=
+                            \frac{(8,4)}{4\sqrt5}
+                            \]
+
+                            \[
+                            \boxed{
+                            \vec{u}_{\max}=
+                            \left(\frac2{\sqrt5},\frac1{\sqrt5}\right)
+                            }
+                            \]
+                        </div>
+                    </div>
+
+                    <div class="solution-step">
+                        <span class="step-number">5</span>
+
+                        <div>
+                            <h5>Calcular la tasa máxima de aumento</h5>
+
+                            <p>
+                                La derivada direccional máxima es la magnitud
+                                del gradiente:
+                            </p>
+
+                            \[
+                            D_{\vec{u}_{\max}}T(1,2)
+                            =\|\nabla T(1,2)\|
+                            \]
+
+                            \[
+                            \boxed{D_{\vec{u}_{\max}}T(1,2)=4\sqrt5}
+                            \]
+
+                            <p>Aproximadamente:</p>
+
+                            \[
+                            4\sqrt5\approx 8.94
+                            \]
+                        </div>
+                    </div>
+
+                    <div class="answer-box">
+                        <span class="answer-label">RESPUESTA FINAL</span>
+
+                        <p>
+                            <strong>Dirección de máximo crecimiento:</strong>
+                        </p>
+
+                        \[
+                        \left(\frac2{\sqrt5},\frac1{\sqrt5}\right)
+                        \]
+
+                        <p>
+                            <strong>Tasa máxima de aumento:</strong>
+                        </p>
+
+                        \[
+                        4\sqrt5\approx 8.94
+                        \]
+
+                        <p class="answer-explanation">
+                            El gradiente indica hacia dónde aumenta más
+                            rápidamente la temperatura. Su magnitud
+                            representa la tasa máxima de aumento en ese punto.
+                        </p>
+                    </div>
+
+                </div>
+
+            </article>
+        </section>
+
+        <!-- CIERRE -->
+        <section class="closing-note">
+            <span class="closing-symbol">∴</span>
+
+            <div>
+                <h2>Un paso a la vez</h2>
+
+                <p>
+                    En cálculo, comprender el procedimiento es tan importante
+                    como encontrar la respuesta. Practica cada paso hasta que
+                    puedas resolverlo por tu cuenta.
+                </p>
+            </div>
+        </section>
+
+        <footer class="page-footer">
+            <p>CLASE DE CÁLCULO II · DERIVADA DIRECCIONAL</p>
+            <p>Construido con curiosidad y dedicación <span>✦</span></p>
+        </footer>
+
+    </main>
+
+</body>
+</html>

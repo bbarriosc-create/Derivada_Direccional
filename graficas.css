@@ -142,3 +142,128 @@ body {
     color: #aaa;
 }
 
+/* =========================================
+   FONDO CUADRICULADO TIPO LIBRETA
+   ========================================= */
+body {
+    background-color: #f7f9fa; /* Fondo gris muy tenue */
+    background-image: 
+        linear-gradient(#eef1f3 1px, transparent 1px), 
+        linear-gradient(90deg, #eef1f3 1px, transparent 1px);
+    background-size: 30px 30px; /* Tamaño de la cuadrícula */
+    font-family: 'Inter', sans-serif; /* Letra base limpia */
+    color: #4a5568; /* Gris azulado para el texto, no negro puro */
+}
+
+/* =========================================
+   TÍTULOS Y TEXTOS
+   ========================================= */
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: #2d3748; /* Azul marino muy oscuro */
+    font-weight: 700;
+}
+
+.subtitulo-mano {
+    font-family: 'Caveat', cursive;
+    color: #718096;
+    font-size: 1.6rem;
+    margin-bottom: -10px; /* Acerca la letra de mano al título principal */
+}
+
+/* =========================================
+   CAJA DE FÓRMULA ESTILO REFERENCIA
+   ========================================= */
+.caja-formula {
+    background-color: #ffffff;
+    border-left: 2px solid #2b6cb0; /* La línea azul del lado izquierdo */
+    padding: 40px;
+    margin: 30px 0;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02); /* Sombra súper sutil */
+}
+
+.etiqueta-formula {
+    font-family: 'Caveat', cursive;
+    background-color: #f7f9fa;
+    color: #718096;
+    font-size: 1.2rem;
+    padding: 2px 10px;
+    position: absolute;
+    top: -15px; /* Sube la etiqueta para que sobresalga de la caja */
+    left: 15px;
+}
+
+/* =========================================
+   ESTILO MATEMÁTICO (FRACCIONES Y VARIABLES)
+   ========================================= */
+.matematica {
+    font-family: 'STIX Two Math', serif; /* Letra científica exacta */
+    font-size: 1.8rem;
+    color: #2d3748;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.ecuacion {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Para armar fracciones sin usar imágenes */
+.fraccion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.fraccion .numerador {
+    border-bottom: 2px solid #2d3748;
+    padding: 0 5px;
+}
+
+.fraccion .denominador {
+    padding: 0 5px;
+}
+/* =========================================
+   FIRMA D & G (ESQUINA SUPERIOR DERECHA)
+   ========================================= */
+.firma {
+    position: fixed; 
+    top: 25px; 
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 9999;
+    transform: rotate(-4deg); /* Inclinación de firma real */
+}
+
+.firma-texto {
+    font-family: 'Caveat', cursive !important;
+    font-size: 3.5rem !important;             
+    color: #2b4c5e !important;             
+    line-height: 0.8 !important;
+    margin-bottom: 5px !important;
+    font-weight: 400 !important; /* <--- AQUÍ ESTÁ EL CAMBIO */
+}
+
+.firma-linea {
+    width: 115%;                   
+    height: 2px;
+    background-color: #5c7c8c;     
+    margin-bottom: 5px;
+    border-radius: 2px;
+}
+
+.firma small {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: #5c7c8c;
+    letter-spacing: 2px;           
+    text-transform: uppercase;
+}
