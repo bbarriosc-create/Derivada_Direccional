@@ -13,21 +13,33 @@ body {
 }
 
 /* =========================================
-   BOTÓN VOLVER
+   BOTÓN VOLVER (FIJO ARRIBA A LA IZQUIERDA)
    ========================================= */
-.btn-volver {
-    position: fixed;
-    top: 20px;
-    left: 30px;
-    text-decoration: none;
-    font-weight: 700;
-    color: #111;
-    border: 2px solid #111;
-    padding: 8px 20px;
-    border-radius: 30px;
-    background: #fff;
-    z-index: 100;
-    transition: all 0.3s;
+.boton-volver {
+    position: fixed !important;
+    top: 30px !important;
+    left: 40px !important;
+    z-index: 9999 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 10px 18px !important;
+    border: 1px solid rgba(49, 91, 133, 0.20) !important;
+    border-radius: 8px !important;
+    color: #203e60 !important;
+    background: rgba(255, 254, 250, 0.95) !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 8px 20px rgba(34, 51, 72, 0.05) !important;
+    text-decoration: none !important;
+}
+
+.boton-volver:hover {
+    background: #ffffff !important;
+    border-color: #315b85 !important;
+    transform: translateY(-2px) !important;
 }
 
 .btn-volver:hover {
@@ -230,40 +242,37 @@ h1, h2, h3 {
     padding: 0 5px;
 }
 /* =========================================
-   FIRMA D & G (ESQUINA SUPERIOR DERECHA)
+   FIRMA D & G (ESTILO NUEVO - ARRIBA DERECHA)
    ========================================= */
 .firma {
-    position: fixed; 
-    top: 25px; 
-    right: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 9999;
-    transform: rotate(-4deg); /* Inclinación de firma real */
-}
-
-.firma-texto {
-    font-family: 'Caveat', cursive !important;
-    font-size: 3.5rem !important;             
-    color: #2b4c5e !important;             
+    position: fixed !important; 
+    top: 30px !important;
+    right: 50px !important;
+    z-index: 9999 !important;
+    text-align: center !important;
+    
+    /* Basado en tu ejercicios.css e imagen de referencia */
+    color: #203e60 !important; /* Color --blue-dark */
+    font-family: "Caveat", cursive !important;
+    font-size: 2.0rem !important;
+    font-weight: 700 !important; 
     line-height: 0.8 !important;
-    margin-bottom: 5px !important;
-    font-weight: 400 !important; /* <--- AQUÍ ESTÁ EL CAMBIO */
+    transform: rotate(-5deg) !important; /* La inclinación exacta */
 }
 
-.firma-linea {
-    width: 115%;                   
-    height: 2px;
-    background-color: #5c7c8c;     
-    margin-bottom: 5px;
-    border-radius: 2px;
+/* El color naranja para el símbolo & */
+.firma span {
+    color: #b77742 !important; /* Color --orange */
+    font-size: 2.3rem !important;
 }
 
+/* El texto de Cálculo II - 2026 escrito a mano */
 .firma small {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
-    color: #5c7c8c;
-    letter-spacing: 2px;           
-    text-transform: uppercase;
+    display: block !important;
+    color: #315b85 !important; /* Color --blue un poco más claro */
+    font-family: "Caveat", cursive !important; 
+    font-size: 1.1rem !important;
+    letter-spacing: 3px !important;
+    text-transform: uppercase !important;
+    margin-top: 5px !important;
 }
